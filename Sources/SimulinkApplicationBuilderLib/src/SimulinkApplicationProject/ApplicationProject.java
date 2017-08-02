@@ -5,6 +5,8 @@
  */
 package SimulinkApplicationProject;
 
+import SimulinkApplicationProject.ApplicationData.ApplicationParametersCollection;
+import SimulinkApplicationProject.ApplicationData.ApplicationSignalsCollection;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -32,12 +34,19 @@ public class ApplicationProject
     
     private String Name;
     
-    private final List<ApplicationTask> Tasks;
+    private List<ApplicationTask> Tasks;
+    
+    private ApplicationSignalsCollection ApplicationSignals;
+    
+    private ApplicationParametersCollection ApplicationParameters;
     
     public ApplicationProject()
     {
         Name = "";
         Tasks = new ArrayList<>();
+        ApplicationSignals = new ApplicationSignalsCollection();
+        ApplicationParameters = new ApplicationParametersCollection();
+        
     }
 
     public String getName()
@@ -53,6 +62,16 @@ public class ApplicationProject
     public List<ApplicationTask> getTasks()
     {
         return Tasks;
+    }
+
+    public ApplicationSignalsCollection getApplicationSignals()
+    {
+        return ApplicationSignals;
+    }
+
+    public ApplicationParametersCollection getApplicationParameters()
+    {
+        return ApplicationParameters;
     }
     
     public void writeProjectXml(String FilePath)
@@ -158,7 +177,7 @@ public class ApplicationProject
                         {
                             nField.setTextContent(String.valueOf(FieldValue));
                         } 
-                        else if (oField.getType() == List.class)
+                        else if (oField.getType() == List.class || oField.getType().getSuperclass() == ArrayList.class)
                         {
                             List<Object> oCollection = (List<Object>)FieldValue;
 
@@ -312,7 +331,7 @@ public class ApplicationProject
             {
             }
         }
-        else if(oField.getType()==List.class)
+        else if(oField.getType()==List.class || oField.getType().getSuperclass() == ArrayList.class)
         {
             try
             {
@@ -325,16 +344,36 @@ public class ApplicationProject
 
                     if(nItem.getNodeType()==Node.ELEMENT_NODE)
                     {
-                        Object oItem = Class.forName(nItem.getNodeName()).newInstance();
-
-                        readObjectProperties(oItem, nItem);
-
-                        oCollection.add(oItem);
+                        try
+                        {
+                            Object oItem = null;
+                            Class<?> oItemClass = Class.forName(nItem.getNodeName());
+                            
+                            //Cannot use Class.newInstance() on primitive types (such as long) since primitive types do not have constructor without calling argument
+                            try
+                            {
+                                Field oTypeField = oItemClass.getField("TYPE");
+                                
+                                oItem = oItemClass.getConstructor(String.class).newInstance("0");
+                            } 
+                            catch (NoSuchFieldException e)
+                            {
+                                oItem = oItemClass.newInstance();
+                            }
+                            catch (SecurityException e)
+                            {
+                            }
+                            
+                            readObjectProperties(oItem, nItem);
+                            oCollection.add(oItem);
+                        } 
+                        catch (Exception e)
+                        {
+                        }
                     }
                 }
-
-            } 
-            catch (ClassNotFoundException | IllegalAccessException | IllegalArgumentException | InstantiationException e)
+            }
+            catch (Exception e)
             {
             }
         }

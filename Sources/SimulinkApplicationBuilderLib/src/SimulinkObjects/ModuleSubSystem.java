@@ -5,8 +5,6 @@
  */
 package SimulinkObjects;
 
-import SimulinkObjects.SimulinkBusObjects.ParametersBusObject.ParametersBus;
-import SimulinkObjects.SimulinkBusObjects.SignalsBusObjects.SignalsBus;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,26 +20,20 @@ public class ModuleSubSystem
     
     private boolean Active;
     
-    private List<SignalsBus> Inputs;
+    private List<Long> Inputs;
     
-    private SignalsBus Outputs;
+    private List<Long> Outputs;
     
-    private SignalsBus Logging;
-    
-    private ParametersBus Calibrations;
-    
-    private List<ParametersBus> ExternalCalibrations;
+    private List<Long> Parameters;
     
     public ModuleSubSystem()
     {
-        Name = "";
-        ModelPath = "";
-        Active = false;
-        Inputs = new ArrayList<>();
-        Outputs = new SignalsBus();
-        Logging = new SignalsBus();
-        Calibrations = new ParametersBus();
-        ExternalCalibrations = new ArrayList<>();
+        this.Name = "";
+        this.ModelPath = "";
+        this.Active = false;
+        this.Inputs = new ArrayList<>();
+        this.Outputs = new ArrayList<>();
+        this.Parameters = new ArrayList<>();
     }
 
     public String getName()
@@ -74,54 +66,19 @@ public class ModuleSubSystem
         this.Active = Active;
     }
 
-    public List<SignalsBus> getInputs()
+    public List<Long> getInputs()
     {
         return Inputs;
     }
 
-    public void setInputs(List<SignalsBus> Inputs)
-    {
-        this.Inputs = Inputs;
-    }
-
-    public SignalsBus getOutputs()
+    public List<Long> getOutputs()
     {
         return Outputs;
     }
 
-    public void setOutputs(SignalsBus Outputs)
+    public List<Long> getParameters()
     {
-        this.Outputs = Outputs;
-    }
-
-    public SignalsBus getLogging()
-    {
-        return Logging;
-    }
-
-    public void setLogging(SignalsBus Logging)
-    {
-        this.Logging = Logging;
-    }
-
-    public ParametersBus getCalibrations()
-    {
-        return Calibrations;
-    }
-
-    public void setCalibrations(ParametersBus Calibrations)
-    {
-        this.Calibrations = Calibrations;
-    }
-
-    public List<ParametersBus> getExternalCalibrations()
-    {
-        return ExternalCalibrations;
-    }
-
-    public void setExternalCalibrations(List<ParametersBus> ExternalCalibrations)
-    {
-        this.ExternalCalibrations = ExternalCalibrations;
+        return Parameters;
     }
     
     

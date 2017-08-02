@@ -5,6 +5,7 @@
  */
 package SimulinkObjects.SimulinkBusObjects.SignalsBusObjects;
 
+import SimulinkApplicationProject.ApplicationData.ApplicationSignal;
 import SimulinkObjects.SimulinkBusObjects.AbstractObjects.SimulinkBus;
 import SimulinkObjects.SimulinkItemScope;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import java.util.List;
  */
 public class SignalsBus extends SimulinkBus
 {
-    private List<SignalElement> Signals;
+    private List<ApplicationSignal> Signals;
     
     public SignalsBus()
     {
@@ -29,7 +30,7 @@ public class SignalsBus extends SimulinkBus
         Signals=new ArrayList<>();
     }
 
-    public List<SignalElement> getSignals()
+    public List<ApplicationSignal> getSignals()
     {
         return Signals;
     }

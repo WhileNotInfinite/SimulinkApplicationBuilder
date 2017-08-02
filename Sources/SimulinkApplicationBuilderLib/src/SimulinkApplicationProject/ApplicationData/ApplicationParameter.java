@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package SimulinkObjects.SimulinkBusObjects.ParametersBusObject;
+package SimulinkApplicationProject.ApplicationData;
 
-import SimulinkObjects.SimulinkBusObjects.AbstractObjects.SimulinkBusElement;
+import SimulinkApplicationProject.AbstractObjects.ApplicationDataObject;
 
 /**
  *
  * @author braul
  */
-public class ParameterElement extends SimulinkBusElement
+public class ApplicationParameter extends ApplicationDataObject
 {
     private final int SizeX;
 
@@ -19,14 +19,14 @@ public class ParameterElement extends SimulinkBusElement
     
     private final int SizeZ;
     
-    public ParameterElement()
+    public ApplicationParameter()
     {
         SizeX = 1;
         SizeY = 1;
         SizeZ = 1;
     }
 
-    public ParameterElement(int SizeX, int SizeY, int SizeZ, String Name, String DataType, double Min, double Max, double Initial, String Unit, String Description)
+    public ApplicationParameter(int SizeX, int SizeY, int SizeZ, String Name, String DataType, double Min, double Max, double Initial, String Unit, String Description)
     {
         super(Name, DataType, Min, Max, Initial, Unit, Description);
         this.SizeX = SizeX;

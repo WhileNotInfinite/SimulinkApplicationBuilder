@@ -5,6 +5,7 @@
  */
 package SimulinkObjects.SimulinkBusObjects.ParametersBusObject;
 
+import SimulinkApplicationProject.ApplicationData.ApplicationParameter;
 import SimulinkObjects.SimulinkBusObjects.AbstractObjects.SimulinkBus;
 import SimulinkObjects.SimulinkItemScope;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import java.util.List;
  */
 public class ParametersBus extends SimulinkBus
 {
-    private List<ParameterElement> Parameters;
+    private List<ApplicationParameter> Parameters;
 
     public ParametersBus()
     {
