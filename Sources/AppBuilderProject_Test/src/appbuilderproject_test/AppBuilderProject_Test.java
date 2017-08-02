@@ -5,14 +5,13 @@
  */
 package appbuilderproject_test;
 
+import SimulinkApplicationProject.ApplicationData.ApplicationParameter;
+import SimulinkApplicationProject.ApplicationData.ApplicationSignal;
 import SimulinkApplicationProject.ApplicationProject;
 import SimulinkApplicationProject.ApplicationTask;
 import SimulinkApplicationProject.ApplicationTaskCallingMode;
 import SimulinkApplicationProject.TaskModule;
 import SimulinkObjects.ModuleSubSystem;
-import SimulinkObjects.SimulinkBusObjects.SignalsBusObjects.SignalElement;
-import SimulinkObjects.SimulinkBusObjects.SignalsBusObjects.SignalsBus;
-import SimulinkObjects.SimulinkItemScope;
 
 /**
  *
@@ -61,7 +60,32 @@ public class AppBuilderProject_Test
         oProject = new ApplicationProject();
 
         oProject.setName("EngineControlTestProject");
-
+        
+        //Create application signals collection
+        oProject.getApplicationSignals().add(new ApplicationSignal("Rev", "Single", 0, 9000, 0, "rpm", "Engine speed"));
+        oProject.getApplicationSignals().add(new ApplicationSignal("ThrPos", "Single", 0, 100, 0, "%", "Throttle position"));
+        oProject.getApplicationSignals().add(new ApplicationSignal("WaterTemp", "Single", -50, 150, 20, "°C", "Water temperature"));
+        oProject.getApplicationSignals().add(new ApplicationSignal("AirTemp", "Single", -50, 50, 20, "°C", "Intake air temperature"));
+        oProject.getApplicationSignals().add(new ApplicationSignal("InjectorStates", "uint8", 0, 15, 0, "", "Injectors status bits field"));
+        oProject.getApplicationSignals().add(new ApplicationSignal("FuelPressure", "Single", 0, 500, 0, "bar", "Fuel pressure"));
+        oProject.getApplicationSignals().add(new ApplicationSignal("FuelPumpError", "boolean", 0, 1, 0, "", "Fuel pump error flag"));
+        
+        oProject.getApplicationSignals().add(new ApplicationSignal("TInj1", "Single", 0, 100, 0, "ms", "Injection time for injector 1"));
+        oProject.getApplicationSignals().add(new ApplicationSignal("TInj2", "Single", 0, 100, 0, "ms", "Injection time for injector 2"));
+        oProject.getApplicationSignals().add(new ApplicationSignal("TInj3", "Single", 0, 100, 0, "ms", "Injection time for injector 3"));
+        oProject.getApplicationSignals().add(new ApplicationSignal("TInj4", "Single", 0, 100, 0, "ms", "Injection time for injector 4"));
+        oProject.getApplicationSignals().add(new ApplicationSignal("InjPhase", "Single", -720, 720, 0, "°", "Injection phase"));
+        oProject.getApplicationSignals().add(new ApplicationSignal("MInj", "Single", 0, 100, 0, "mg", "Fuel mass to be injected"));
+        oProject.getApplicationSignals().add(new ApplicationSignal("TWaterCorr", "Single", 0, 2, 1, "", "Water temperature correction factor"));
+        oProject.getApplicationSignals().add(new ApplicationSignal("TAirCorr", "Single", 0, 2, 1, "", "Air temperature correction factor"));
+        
+        //Create application parameter collection
+        oProject.getApplicationParameters().add(new ApplicationParameter(12, 10, 1, "PhaseMap", "Single", -720, 720, 0, "°", "Injection phase angle map"));
+        oProject.getApplicationParameters().add(new ApplicationParameter(12, 10, 1, "MinjMap", "Single", 0, 720, 100, "mg", "Injection quantity map"));
+        oProject.getApplicationParameters().add(new ApplicationParameter(10, 1, 1, "TWaterCorrectionMap", "Single", 0, 2, 1, "", "Injection quantity correction on water temp map"));
+        oProject.getApplicationParameters().add(new ApplicationParameter(10, 1, 1, "TAirCorrectionMap", "Single", 0, 2, 1, "", "Injection quantity correction on air temp map"));
+        oProject.getApplicationParameters().add(new ApplicationParameter(1, 1, 1, "FuelPressureFactor", "Single", 0, 10, 0.1, "", "Injection Quantity to time fuel pressure factor"));
+        
         //Add tasks to the application
         oTask = new ApplicationTask();
         oTask.setName("EngineControl1msTask");
@@ -74,34 +98,28 @@ public class AppBuilderProject_Test
         oSubSystem = new ModuleSubSystem();
         oSubSystem.setName("Injection_V1");
         
-        SignalsBus InputBus1 = new SignalsBus("EngineSensors", SimulinkItemScope.AUTO, "", "Engine sensors data");
-        InputBus1.getSignals().add(new SignalElement("Rev", "Single", 0, 9000, 0, "rpm", "Engine speed"));
-        InputBus1.getSignals().add(new SignalElement("ThrPos", "Single", 0, 100, 0, "%", "Throttle position"));
-        InputBus1.getSignals().add(new SignalElement("WaterTemp", "Single", -50, 150, 20, "°C", "Water temperature"));
-        InputBus1.getSignals().add(new SignalElement("AirTemp", "Single", -50, 50, 20, "°C", "Intake air temperature"));
+        oSubSystem.getInputs().add(oProject.getApplicationSignals().getSignalIdentifierKey("Rev"));
+        oSubSystem.getInputs().add(oProject.getApplicationSignals().getSignalIdentifierKey("ThrPos"));
+        oSubSystem.getInputs().add(oProject.getApplicationSignals().getSignalIdentifierKey("WaterTemp"));
+        oSubSystem.getInputs().add(oProject.getApplicationSignals().getSignalIdentifierKey("AirTemp"));
+        oSubSystem.getInputs().add(oProject.getApplicationSignals().getSignalIdentifierKey("InjectorStates"));
+        oSubSystem.getInputs().add(oProject.getApplicationSignals().getSignalIdentifierKey("FuelPressure"));
+        oSubSystem.getInputs().add(oProject.getApplicationSignals().getSignalIdentifierKey("FuelPumpError"));
         
-        SignalsBus InputBus2 = new SignalsBus("EngineDiagnostics", SimulinkItemScope.AUTO, "", "Engine diagnostics data");
-        InputBus2.getSignals().add(new SignalElement("InjectorStates", "uint8", 0, 15, 0, "", "Injectors status bits field"));
-        InputBus2.getSignals().add(new SignalElement("FuelPumpError", "boolean", 0, 1, 0, "", "Fuel pump error flag"));
+        oSubSystem.getOutputs().add(oProject.getApplicationSignals().getSignalIdentifierKey("TInj1"));
+        oSubSystem.getOutputs().add(oProject.getApplicationSignals().getSignalIdentifierKey("TInj2"));
+        oSubSystem.getOutputs().add(oProject.getApplicationSignals().getSignalIdentifierKey("TInj3"));
+        oSubSystem.getOutputs().add(oProject.getApplicationSignals().getSignalIdentifierKey("TInj4"));
+        oSubSystem.getOutputs().add(oProject.getApplicationSignals().getSignalIdentifierKey("InjPhase"));
+        oSubSystem.getOutputs().add(oProject.getApplicationSignals().getSignalIdentifierKey("MInj"));
+        oSubSystem.getOutputs().add(oProject.getApplicationSignals().getSignalIdentifierKey("TWaterCorr"));
+        oSubSystem.getOutputs().add(oProject.getApplicationSignals().getSignalIdentifierKey("TAirCorr"));
         
-        oSubSystem.getInputs().add(InputBus1);
-        oSubSystem.getInputs().add(InputBus2);
-        
-        SignalsBus OutputsBus = new SignalsBus("InjectionOutputs", SimulinkItemScope.AUTO, "", "Injection module outputs");
-        OutputsBus.getSignals().add(new SignalElement("TInj1", "Single", 0, 100, 0, "ms", "Injection time for injector 1"));
-        OutputsBus.getSignals().add(new SignalElement("TInj2", "Single", 0, 100, 0, "ms", "Injection time for injector 2"));
-        OutputsBus.getSignals().add(new SignalElement("TInj3", "Single", 0, 100, 0, "ms", "Injection time for injector 3"));
-        OutputsBus.getSignals().add(new SignalElement("TInj4", "Single", 0, 100, 0, "ms", "Injection time for injector 4"));
-        OutputsBus.getSignals().add(new SignalElement("InjPhase", "Single", -720, 720, 0, "°", "Injection phase"));
-        
-        oSubSystem.setOutputs(OutputsBus);
-        
-        SignalsBus LoggingBus = new SignalsBus("InjectionLogging", SimulinkItemScope.AUTO, "", "Injection module logging data");
-        LoggingBus.getSignals().add(new SignalElement("MInj", "Single", 0, 100, 0, "mg", "Fuel mass to be injected"));
-        LoggingBus.getSignals().add(new SignalElement("TWaterCorr", "Single", 0, 2, 0, "", "Water temperature correction factor"));
-        LoggingBus.getSignals().add(new SignalElement("TAirCorr", "Single", 0, 2, 0, "", "Air temperature correction factor"));
-        
-        oSubSystem.setLogging(LoggingBus);
+        oSubSystem.getParameters().add(oProject.getApplicationParameters().getParameterIdentifierKey("PhaseMap"));
+        oSubSystem.getParameters().add(oProject.getApplicationParameters().getParameterIdentifierKey("MinjMap"));
+        oSubSystem.getParameters().add(oProject.getApplicationParameters().getParameterIdentifierKey("TWaterCorrectionMap"));
+        oSubSystem.getParameters().add(oProject.getApplicationParameters().getParameterIdentifierKey("TAirCorrectionMap"));
+        oSubSystem.getParameters().add(oProject.getApplicationParameters().getParameterIdentifierKey("FuelPressureFactor"));
         
         oModule.getModels().add(oSubSystem);
 
