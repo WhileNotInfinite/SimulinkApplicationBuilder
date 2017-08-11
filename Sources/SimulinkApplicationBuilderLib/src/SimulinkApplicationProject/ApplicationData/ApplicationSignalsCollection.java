@@ -47,4 +47,17 @@ public class ApplicationSignalsCollection extends ArrayList<ApplicationSignal>
         
         return(-1);
     }
+    
+    public ApplicationSignal getSignalByIdentifierKey(long KeyId)
+    {
+        for (ApplicationSignal signal : this)
+        {
+            if (signal.getIdentiferKey() == KeyId)
+            {
+                return (signal);
+            }
+        }
+
+        return (null);
+    }
 }

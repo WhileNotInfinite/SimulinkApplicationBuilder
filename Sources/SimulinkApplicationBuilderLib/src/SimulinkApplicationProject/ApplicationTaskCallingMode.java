@@ -13,7 +13,7 @@ public enum ApplicationTaskCallingMode
 {
     BACKGROUND(0),
     CYCLIC(1),
-    INTERUP(2);
+    INTERUPT(2);
 
     private final int value;
 

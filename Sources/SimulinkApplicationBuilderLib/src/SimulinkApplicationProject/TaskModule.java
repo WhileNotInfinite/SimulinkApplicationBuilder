@@ -5,7 +5,6 @@
  */
 package SimulinkApplicationProject;
 
-import SimulinkObjects.ModuleSubSystem;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +39,29 @@ public class TaskModule
         return Models;
     }
     
+    public String getActiveModelName()
+    {
+        for (ModuleSubSystem oSubSystem : Models)
+        {
+            if (oSubSystem.isActive())
+            {
+                return (oSubSystem.getName());
+            }
+        }
+
+        return ("");
+    }
     
-    
+    public ModuleSubSystem getSubSystemByName(String ModelName)
+    {
+        for (ModuleSubSystem oSubSystem : Models)
+        {
+            if (oSubSystem.getName().equals(ModelName))
+            {
+                return (oSubSystem); //Assuumes that active model is unique into the module
+            }
+        }
+
+        return (null);
+    }
 }

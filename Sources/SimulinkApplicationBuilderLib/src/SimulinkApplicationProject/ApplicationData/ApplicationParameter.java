@@ -13,11 +13,11 @@ import SimulinkApplicationProject.AbstractObjects.ApplicationDataObject;
  */
 public class ApplicationParameter extends ApplicationDataObject
 {
-    private final int SizeX;
+    private int SizeX;
 
-    private final int SizeY;
+    private int SizeY;
     
-    private final int SizeZ;
+    private int SizeZ;
     
     public ApplicationParameter()
     {
@@ -33,4 +33,36 @@ public class ApplicationParameter extends ApplicationDataObject
         this.SizeY = SizeY;
         this.SizeZ = SizeZ;
     }
+
+    public int getSizeX()
+    {
+        return SizeX;
+    }
+
+    public void setSizeX(int SizeX)
+    {
+        this.SizeX = SizeX;
+    }
+
+    public int getSizeY()
+    {
+        return SizeY;
+    }
+
+    public void setSizeY(int SizeY)
+    {
+        this.SizeY = SizeY;
+    }
+
+    public int getSizeZ()
+    {
+        return SizeZ;
+    }
+
+    public void setSizeZ(int SizeZ)
+    {
+        this.SizeZ = SizeZ;
+    }
+    
+    
 }

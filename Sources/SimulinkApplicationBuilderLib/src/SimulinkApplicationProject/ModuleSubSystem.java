@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package SimulinkObjects;
+package SimulinkApplicationProject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +20,8 @@ public class ModuleSubSystem
     
     private boolean Active;
     
+    private final TaskModule ParentModule;
+    
     private List<Long> Inputs;
     
     private List<Long> Outputs;
@@ -31,6 +33,18 @@ public class ModuleSubSystem
         this.Name = "";
         this.ModelPath = "";
         this.Active = false;
+        this.ParentModule = null;
+        this.Inputs = new ArrayList<>();
+        this.Outputs = new ArrayList<>();
+        this.Parameters = new ArrayList<>();
+    }
+    
+    public ModuleSubSystem(TaskModule oParentModule)
+    {
+        this.Name = "";
+        this.ModelPath = "";
+        this.Active = false;
+        this.ParentModule = oParentModule;
         this.Inputs = new ArrayList<>();
         this.Outputs = new ArrayList<>();
         this.Parameters = new ArrayList<>();
@@ -64,6 +78,11 @@ public class ModuleSubSystem
     public void setActive(boolean Active)
     {
         this.Active = Active;
+    }
+
+    public TaskModule getParentModule()
+    {
+        return ParentModule;
     }
 
     public List<Long> getInputs()

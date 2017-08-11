@@ -70,6 +70,66 @@ public abstract class ApplicationDataObject
     {
         this.IdentiferKey = IdentiferKey;
     }
+
+    public String getDataType()
+    {
+        return DataType;
+    }
+
+    public void setDataType(String DataType)
+    {
+        this.DataType = DataType;
+    }
+
+    public double getMinValue()
+    {
+        return MinValue;
+    }
+
+    public void setMinValue(double MinValue)
+    {
+        this.MinValue = MinValue;
+    }
+
+    public double getMaxValue()
+    {
+        return MaxValue;
+    }
+
+    public void setMaxValue(double MaxValue)
+    {
+        this.MaxValue = MaxValue;
+    }
+
+    public double getInitialValue()
+    {
+        return InitialValue;
+    }
+
+    public void setInitialValue(double InitialValue)
+    {
+        this.InitialValue = InitialValue;
+    }
+
+    public String getUnit()
+    {
+        return Unit;
+    }
+
+    public void setUnit(String Unit)
+    {
+        this.Unit = Unit;
+    }
+
+    public String getDescription()
+    {
+        return Description;
+    }
+
+    public void setDescription(String Description)
+    {
+        this.Description = Description;
+    }
     
     
 }
