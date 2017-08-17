@@ -65,5 +65,17 @@ public class ApplicationTask
         return Modules;
     }
     
+    public TaskModule getModuleByName(String ModuleName)
+    {
+        for(TaskModule module:Modules)
+        {
+            if(module.getName().equals(ModuleName))
+            {
+                return (module);
+            }
+        }
+        
+        return (null);
+    }
     
 }

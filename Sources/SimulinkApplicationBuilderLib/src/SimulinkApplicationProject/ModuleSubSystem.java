@@ -20,8 +20,6 @@ public class ModuleSubSystem
     
     private boolean Active;
     
-    private final TaskModule ParentModule;
-    
     private List<Long> Inputs;
     
     private List<Long> Outputs;
@@ -33,18 +31,6 @@ public class ModuleSubSystem
         this.Name = "";
         this.ModelPath = "";
         this.Active = false;
-        this.ParentModule = null;
-        this.Inputs = new ArrayList<>();
-        this.Outputs = new ArrayList<>();
-        this.Parameters = new ArrayList<>();
-    }
-    
-    public ModuleSubSystem(TaskModule oParentModule)
-    {
-        this.Name = "";
-        this.ModelPath = "";
-        this.Active = false;
-        this.ParentModule = oParentModule;
         this.Inputs = new ArrayList<>();
         this.Outputs = new ArrayList<>();
         this.Parameters = new ArrayList<>();
@@ -79,12 +65,7 @@ public class ModuleSubSystem
     {
         this.Active = Active;
     }
-
-    public TaskModule getParentModule()
-    {
-        return ParentModule;
-    }
-
+    
     public List<Long> getInputs()
     {
         return Inputs;

@@ -147,6 +147,19 @@ public class ApplicationProject
         }
     }
     
+    public ApplicationTask getTaskByName(String TaskName)
+    {
+        for(ApplicationTask oTask: this.Tasks)
+        {
+            if (oTask.getName().equals(TaskName))
+            {
+                return (oTask);
+            }
+        }
+        
+        return (null);
+    }
+    
     private void writeObjectProperties(Object Obj, Document oXDoc, Element nParentElement)
     {
         Element nField;

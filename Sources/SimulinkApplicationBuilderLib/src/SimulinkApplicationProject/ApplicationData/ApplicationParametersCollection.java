@@ -47,4 +47,17 @@ public class ApplicationParametersCollection extends ArrayList<ApplicationParame
         
         return(-1);
     }
+    
+    public ApplicationParameter getApplicationParameterByIdentifierKey(long KeyId)
+    {
+        for(ApplicationParameter parameter: this)
+        {
+            if(parameter.getIdentiferKey()==KeyId)
+            {
+                return (parameter);
+            }
+        }
+        
+        return (null);
+    }
 }
