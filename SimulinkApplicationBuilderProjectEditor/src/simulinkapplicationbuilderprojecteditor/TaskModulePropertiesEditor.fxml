@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="simulinkapplicationbuilderprojecteditor.TaskModulePropertiesEditorController">
+   <children>
+      <Label layoutX="14.0" layoutY="21.0" text="Name" />
+      <TextField fx:id="txtName" layoutX="63.0" layoutY="17.0" onAction="#txtName_OnAction" />
+      <Label layoutX="14.0" layoutY="51.0" text="Models" />
+      <ListView fx:id="lstModels" layoutX="63.0" layoutY="51.0" onContextMenuRequested="#lstModel_ContextMenuRequested" onMouseClicked="#lstModel_Clicked" prefHeight="200.0" prefWidth="286.0">
+         <contextMenu>
+            <ContextMenu fx:id="lstModels_ContextMenu">
+              <items>
+                <MenuItem fx:id="lstModels_ContextMenuItem_Active" mnemonicParsing="false" onAction="#lstModels_ContextMenuItem_Active_OnAction" text="Active model" />
+                  <MenuItem fx:id="lstModels_ContextMenuItem_Descative" mnemonicParsing="false" onAction="#lstModels_ContextMenuItem_Descative_OnAction" text="Desactive model" />
+              </items>
+            </ContextMenu>
+         </contextMenu>
+      </ListView>
+   </children>
+</AnchorPane>

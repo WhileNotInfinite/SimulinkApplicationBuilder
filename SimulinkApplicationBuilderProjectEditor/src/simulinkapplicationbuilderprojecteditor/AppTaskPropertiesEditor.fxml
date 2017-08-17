@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simulinkapplicationbuilderprojecteditor.AppTaskPropertiesEditorController">
+   <children>
+      <Label layoutX="14.0" layoutY="20.0" text="Name" />
+      <TextField fx:id="txtName" layoutX="97.0" layoutY="16.0" onAction="#txtName_TextChanged" />
+      <Label layoutX="14.0" layoutY="50.0" text="Calling Mode" />
+      <Label fx:id="lblCycleTimeName" layoutX="14.0" layoutY="81.0" text="Cycle Time" />
+      <ChoiceBox fx:id="cmbCallingMode" layoutX="97.0" layoutY="46.0" prefHeight="25.0" prefWidth="149.0" />
+      <TextField fx:id="txtCycleTime" layoutX="97.0" layoutY="77.0" onAction="#txtCycleTime_TextChanged" prefHeight="25.0" prefWidth="150.0" />
+      <Label layoutX="14.0" layoutY="115.0" text="Modules" />
+      <ListView fx:id="lstModules" layoutX="97.0" layoutY="115.0" onMouseClicked="#lstModules_Clicked" prefHeight="200.0" prefWidth="331.0" />
+      <Label fx:id="lblCycleTimeUnit" layoutX="255.0" layoutY="81.0" text="second" />
+   </children>
+</AnchorPane>
